@@ -1,0 +1,30 @@
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.get('/api/tables', (req, res) => {
+  const tables = [
+    { id: 1, tableno: 'Table One' },
+    { id: 2, tableno: 'Table Second' },
+    { id: 3, tableno: 'Table Three' },
+  ];
+  res.send(tables);
+});
+ // Add new tables to database
+app.post('/api/tables', (req, res) => {
+  const newtables = { id: 4, tableno: 'Table Four' };
+  res.send(newtables);
+});
+// Update Tables with the given id in the database
+app.put('/api/tables/:id', (req, res) => {
+  const { id } = req.params;
+  res.send(`tables with id ${id} updated.`);
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
